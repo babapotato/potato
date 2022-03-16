@@ -1,7 +1,11 @@
 #first steps
 from flask import Flask, request
 from requests import get
-from api import download_summary
+from api import download_summary, download_confirmed_per_country
+
+import logging
+log_format = "[%(levelname)s] - %(asctime)s : %(message)s in %(module)s:%(lineno)d"
+logging.basicConfig(filename='covid.log', format=log_format, level=logging.INFO)
 
 server = Flask('covid dashboard')
 @server.route('/')
@@ -26,7 +30,7 @@ def serve_summary_new():
 @server.route('/netherlands')
 
 def serve_netherlands_history():
-  return "An area chart of COVID cases over time in the Netherlands."
+  return download_confirmed_per_country("netherlands")
 
 
 
