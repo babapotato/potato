@@ -1,5 +1,7 @@
 #first steps
 from flask import Flask, request
+from requests import get
+from api import download_summary
 
 server = Flask('covid dashboard')
 @server.route('/')
@@ -12,7 +14,7 @@ def index():
 @server.route('/summary')
 
 def serve_summary():
-  return "A bar chart summary of COVID cases per country."
+  return download_summary()
   
 
 @server.route('/new')
@@ -25,6 +27,7 @@ def serve_summary_new():
 
 def serve_netherlands_history():
   return "An area chart of COVID cases over time in the Netherlands."
+
 
 
 
